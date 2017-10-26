@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript - A-Frame School</title>
+    <meta name="description" content="JavaScript - A-Frame School">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/blairmacintyre/aframe-look-at-billboard-component/master/dist/aframe-look-at-billboard-component.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      
+      $.ajax({
+  url: "./assets/",
+  success: function(data){
+     $(data).find("a:contains(.jpg)").each(function(){
+        // will loop through 
+        var images = $(this).attr("href");
+
+        console.log(images);
+
+     });
+  }
+});
+      
+      AFRAME.registerComponent('school-playground', {
+        init: function () {
+          // Solution for Creating Entities.
+          var sceneEl = document.querySelector('a-scene'); 
+          
+          for (var i = 0; i < 50; i++) {
+            var boxEl = document.createElement('a-plane');
+            boxEl.setAttribute('colour', '#EF2D5E');
+            boxEl.setAttribute('position', {x: Math.random() * 20 - 10, y: Math.random() * 20 - 10, z: Math.random() * 20 - 10});
+            boxEl.setAttribute('width', 2);
+            boxEl.setAttribute('height', 2);
+            boxEl.setAttribute('billboard', '');
+            sceneEl.appendChild(boxEl);
+          }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene school-playground>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
